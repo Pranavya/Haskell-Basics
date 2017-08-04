@@ -1,0 +1,24 @@
+--Print "Hello World" N amount of times.
+
+import Control.Applicative
+import Control.Monad
+import System.IO
+
+
+main :: IO ()
+main = do
+    n_temp <- getLine
+    let n = read n_temp :: Int
+    hello_worlds n
+
+hello_worlds n = mapM_ putStrLn  (replicate n "Hello World")
+
+getMultipleLines :: Int -> IO [String]
+
+getMultipleLines n
+    | n <= 0 = return []
+    | otherwise = do          
+        x <- getLine         
+        xs <- getMultipleLines (n-1)    
+        let ret = (x:xs)    
+        return ret 
